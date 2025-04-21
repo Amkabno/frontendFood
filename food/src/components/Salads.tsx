@@ -11,11 +11,11 @@ type MovieDataTypes = {
   ingredients: string;
 };
 
-export const Appetizers = () => {
+export const Salads = () => {
   const [foods, setFoods] = useState<MovieDataTypes[]>([]);
   const fetchFoods = async () => {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}food/68009ef1b62026487333f1be`
+      `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}food/6805b0d92e58abc0de86b896`
     );
 
     setFoods(res.data.foods);
@@ -25,12 +25,12 @@ export const Appetizers = () => {
   }, []);
   console.log(foods);
 
-  const cardsData = foods?.slice(0, 6);
+  const cardsData = foods?.slice(0, 3);
 
   return (
     <div className="h-full w-full flex flex-col gap-[54px] pb-[54px]">
-      <p className="text-white text-[30px] font-[600]">Appetizers</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[36px] ">
+      <p className="text-white text-[30px] font-[600]">Salads</p>
+      <div className="grid grid-cols-3 gap-[36px] ">
         {cardsData?.map((card, index) => (
           <Cards
             key={index}

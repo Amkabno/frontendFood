@@ -1,0 +1,9 @@
+import React from "react";
+
+export const BackGroundImg = () => {
+  return (
+    <div className="flex pt-[30px]">
+      <img className="w-full h-[570px]" src="bg.png"></img>
+    </div>
+  );
+};

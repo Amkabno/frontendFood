@@ -1,4 +1,5 @@
 import React from "react";
+import { Plus } from "lucide-react";
 interface CardProps {
   image: string;
   name: string;
@@ -13,17 +14,26 @@ export const Cards: React.FC<CardProps> = ({
   ingredients,
 }) => {
   return (
-    <div>
-      <button className=" h-[342px] w-[397px] rounded-[20px] bg-white ">
-        <div className="flex flex-col p-[16px]">
-          <img src={image} className="" alt={name}></img>
-          <div className="flex">
-            <a>{name}</a>
-            <a>${price}</a>
-          </div>
-          <a>{ingredients}</a>
+    <div className=" h-[342px] w-[397px] rounded-[20px] bg-white ">
+      <div className="flex flex-col p-[16px] gap-[14px]">
+        <div className="relative">
+          <img
+            src={image}
+            className="w-full h-[210px] object-cover rounded-[10px]"
+            alt={name}
+          />
+          <button className="w-[44px] right-5 bottom-5 h-[44px] flex hover:bg-gray-200 transition bg-white items-center justify-center rounded-full absolute">
+            <Plus className="text-[#ef4444] w-[16px] h-[16px]" />
+          </button>
         </div>
-      </button>
+        <div className="flex flex-col gap-[3px]">
+          <div className="flex justify-between items-center">
+            <a className="text-[20px] font-[600] text-[#EF4444]">{name}</a>
+            <a className="text-[18px] font-[600]">${price}</a>
+          </div>
+          <a className="text-[13px] font-[400]">{ingredients}</a>
+        </div>
+      </div>
     </div>
   );
 };
