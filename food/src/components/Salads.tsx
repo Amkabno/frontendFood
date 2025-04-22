@@ -2,8 +2,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Cards } from "./Cards";
+import FoodDetails from "./FoodDetail";
 
-type MovieDataTypes = {
+type FoodDataTypes = {
   image: string;
   id: string;
   name: string;
@@ -12,7 +13,8 @@ type MovieDataTypes = {
 };
 
 export const Salads = () => {
-  const [foods, setFoods] = useState<MovieDataTypes[]>([]);
+  const [foods, setFoods] = useState<FoodDataTypes[]>([]);
+  const [selectedFood, setSelectedFood] = useState<FoodDataTypes | null>(null);
   const fetchFoods = async () => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}food/6805b0d92e58abc0de86b896`
@@ -38,9 +40,19 @@ export const Salads = () => {
             name={card.name}
             price={card.price}
             ingredients={card.ingredients}
+            id={card.id}
+            onClick={() => setSelectedFood(card)}
           />
         ))}
       </div>
+      {selectedFood && (
+        <div className="fixed inset-0 z-1 flex items-center justify-center ">
+          <FoodDetails
+            foodDetails={selectedFood}
+            onClose={() => setSelectedFood(null)}
+          />
+        </div>
+      )}
     </div>
   );
 };

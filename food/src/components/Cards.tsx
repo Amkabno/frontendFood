@@ -5,6 +5,8 @@ interface CardProps {
   name: string;
   price: number;
   ingredients: string;
+  id: string;
+  onClick?: () => void;
 }
 
 export const Cards: React.FC<CardProps> = ({
@@ -12,6 +14,8 @@ export const Cards: React.FC<CardProps> = ({
   name,
   price,
   ingredients,
+
+  onClick,
 }) => {
   return (
     <div className=" h-[342px] w-[397px] rounded-[20px] bg-white ">
@@ -22,7 +26,10 @@ export const Cards: React.FC<CardProps> = ({
             className="w-full h-[210px] object-cover rounded-[10px]"
             alt={name}
           />
-          <button className="w-[44px] right-5 bottom-5 h-[44px] flex hover:bg-gray-200 transition bg-white items-center justify-center rounded-full absolute">
+          <button
+            className="w-[44px] right-5 bottom-5 h-[44px] flex hover:bg-gray-200 transition bg-white items-center justify-center rounded-full absolute"
+            onClick={onClick}
+          >
             <Plus className="text-[#ef4444] w-[16px] h-[16px]" />
           </button>
         </div>

@@ -2,8 +2,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Cards } from "./Cards";
+import FoodDetails from "./FoodDetail";
 
-type MovieDataTypes = {
+type FoodDataTypes = {
   image: string;
   id: string;
   name: string;
@@ -12,25 +13,27 @@ type MovieDataTypes = {
 };
 
 export const Appetizers = () => {
-  const [foods, setFoods] = useState<MovieDataTypes[]>([]);
+  const [foods, setFoods] = useState<FoodDataTypes[]>([]);
+  const [selectedFood, setSelectedFood] = useState<FoodDataTypes | null>(null);
+
   const fetchFoods = async () => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}food/68009ef1b62026487333f1be`
     );
-
     setFoods(res.data.foods);
   };
+
   useEffect(() => {
     fetchFoods();
   }, []);
-  console.log(foods);
 
   const cardsData = foods?.slice(0, 6);
 
   return (
-    <div className="h-full w-full flex flex-col gap-[54px] pb-[54px]">
+    <div className="h-full w-full flex flex-col gap-[54px] pb-[54px] relative">
       <p className="text-white text-[30px] font-[600]">Appetizers</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[36px] ">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[36px]">
         {cardsData?.map((card, index) => (
           <Cards
             key={index}
@@ -38,9 +41,20 @@ export const Appetizers = () => {
             name={card.name}
             price={card.price}
             ingredients={card.ingredients}
+            id={card.id}
+            onClick={() => setSelectedFood(card)}
           />
         ))}
       </div>
+
+      {selectedFood && (
+        <div className="fixed inset-0 z-1 flex items-center justify-center ">
+          <FoodDetails
+            foodDetails={selectedFood}
+            onClose={() => setSelectedFood(null)}
+          />
+        </div>
+      )}
     </div>
   );
 };
