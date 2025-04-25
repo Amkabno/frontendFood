@@ -12,7 +12,7 @@ function ResetPassPage() {
     <div className="flex h-full w-full bg-[#232323]  flex-col">
       <Navigation />
       <BackGroundImg />
-      <div className="flex flex-col p-6">
+      <div className="flex flex-col py-6 px-[88px]">
         <Appetizers />
         <Salads />
         <LunchFavorites />

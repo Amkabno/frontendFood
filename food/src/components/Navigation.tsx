@@ -1,9 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { ShoppingCart, User, MapPin, ChevronRight } from "lucide-react";
+import Address from "./Address";
 
 export const Navigation = () => {
   const [focused, setFocused] = useState(false);
+  const [showAddressCard, setShowAddressCard] = useState(false);
+  const [address, setAddress] = useState("");
 
   return (
     <nav className="flex fixed z-1 justify-between items-center w-full h-[68px] bg-[#18181b] py-[12px] px-[88px]">
@@ -21,7 +24,10 @@ export const Navigation = () => {
       </div>
 
       <div className="flex items-center gap-[12.8px]">
-        <div className="flex items-center bg-white rounded-full w-[260px] h-[36px] px-[10px] gap-[4px]">
+        <button
+          className="flex items-center bg-white rounded-full w-[260px] h-[36px] px-[10px] gap-[4px]"
+          onClick={() => setShowAddressCard(true)}
+        >
           <MapPin className="text-[#ef4444] size-[20px]" />
           {!focused && (
             <span className="text-[#ef4444] text-[13px] font-[400] whitespace-nowrap">
@@ -30,15 +36,17 @@ export const Navigation = () => {
           )}
           <input
             type="text"
+            readOnly
+            value={address}
             placeholder="Add Location"
-            className={`bg-transparent outline-none text-[13px] font-[400] placeholder-gray-500 transition-all duration-300 ${
+            className={` outline-none text-[13px] font-[400] placeholder-gray-500 duration-300 ${
               focused ? "w-full" : "w-[80px]"
             }`}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
           />
           <ChevronRight className="text-gray-500 size-[20px]" />
-        </div>
+        </button>
 
         <a className="w-[36px] h-[36px] bg-white flex justify-center items-center rounded-full">
           <ShoppingCart className="size-[16px]" />
@@ -48,6 +56,17 @@ export const Navigation = () => {
           <User className="text-white size-[16px]" />
         </button>
       </div>
+      {showAddressCard && (
+        <div className="fixed inset-0 z-10 bg-opacity-30 flex items-center justify-center">
+          <Address
+            onClose={() => setShowAddressCard(false)}
+            onSave={(newAddress) => {
+              setAddress(newAddress);
+              setShowAddressCard(false);
+            }}
+          />
+        </div>
+      )}
     </nav>
   );
 };

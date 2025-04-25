@@ -5,7 +5,7 @@ export const Footer = () => {
   const text = Array.from({ length: 20 }, () => "Fresh fast delivered");
 
   return (
-    <div className="w-full h-[755px] bg-[#18181B] ">
+    <div className="w-full h-[700px] bg-[#18181B] ">
       <div className="pt-[60px]">
         <div className="w-full h-[80px] bg-[#ef4444] overflow-hidden relative flex items-center">
           <div className="scroll-text flex gap-[36px] whitespace-nowrap px-[36px]">
