@@ -46,7 +46,7 @@ export const MainDishes = () => {
         ))}
       </div>
       {selectedFood && (
-        <div className="fixed inset-0 z-1 flex items-center justify-center ">
+        <div className="fixed inset-0 z-1 flex items-center justify-center  bg-[rgba(24,24,27,0.4)]">
           <FoodDetails
             foodDetails={selectedFood}
             onClose={() => setSelectedFood(null)}

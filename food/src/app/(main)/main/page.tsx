@@ -1,8 +1,6 @@
 import React from "react";
-import { Appetizers } from "@/components/Appetizers";
-import { Salads } from "@/components/Salads";
-import { LunchFavorites } from "@/components/LunchFavorites";
-import { MainDishes } from "@/components/MainDishes";
+import { FoodsWithCategories } from "@/components/FoodsWithCategories";
+
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { BackGroundImg } from "@/components/BackGroundImg";
@@ -13,10 +11,7 @@ function ResetPassPage() {
       <Navigation />
       <BackGroundImg />
       <div className="flex flex-col py-6 px-[88px]">
-        <Appetizers />
-        <Salads />
-        <LunchFavorites />
-        <MainDishes />
+        <FoodsWithCategories />
       </div>
       <Footer />
     </div>

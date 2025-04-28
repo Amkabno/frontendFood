@@ -1,5 +1,7 @@
 import React from "react";
 import { Plus } from "lucide-react";
+import { FoodsWithCategories } from "./FoodsWithCategories";
+
 interface CardProps {
   image: string;
   name: string;
@@ -14,11 +16,10 @@ export const Cards: React.FC<CardProps> = ({
   name,
   price,
   ingredients,
-
   onClick,
 }) => {
   return (
-    <div className=" h-[342px] w-[397px] rounded-[20px] bg-white ">
+    <div className="h-[342px] w-[397px] rounded-[20px] bg-white">
       <div className="flex flex-col p-[16px] gap-[14px]">
         <div className="relative">
           <img
@@ -36,9 +37,9 @@ export const Cards: React.FC<CardProps> = ({
         <div className="flex flex-col gap-[3px]">
           <div className="flex justify-between items-center">
             <a className="text-[20px] font-[600] text-[#EF4444]">{name}</a>
-            <a className="text-[18px] font-[600]">${price}</a>
+            <a className="text-[18px] font-[600] text-black">${price}</a>
           </div>
-          <a className="text-[13px] font-[400]">{ingredients}</a>
+          <a className="text-[13px] font-[400] text-black">{ingredients}</a>
         </div>
       </div>
     </div>

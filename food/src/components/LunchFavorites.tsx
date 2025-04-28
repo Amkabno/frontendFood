@@ -31,7 +31,7 @@ export const LunchFavorites = () => {
   return (
     <div className="h-full w-full flex flex-col gap-[54px] pb-[54px]">
       <p className="text-white text-[30px] font-[600]">Lunch favorites</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[36px] ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[36px]  ">
         {cardsData?.map((card, index) => (
           <Cards
             key={index}
@@ -45,7 +45,7 @@ export const LunchFavorites = () => {
         ))}
       </div>
       {selectedFood && (
-        <div className="fixed inset-0 z-1 flex items-center justify-center ">
+        <div className="fixed inset-0 z-1 flex items-center justify-center bg-[rgba(24,24,27,0.4)]">
           <FoodDetails
             foodDetails={selectedFood}
             onClose={() => setSelectedFood(null)}
