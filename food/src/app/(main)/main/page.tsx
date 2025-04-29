@@ -4,12 +4,14 @@ import { FoodsWithCategories } from "@/components/FoodsWithCategories";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { BackGroundImg } from "@/components/BackGroundImg";
+import { ImageUpload } from "@/components/ImageUpload";
 
 function ResetPassPage() {
   return (
     <div className="flex h-full w-full bg-[#232323]  flex-col">
       <Navigation />
       <BackGroundImg />
+      <ImageUpload />
       <div className="flex flex-col py-6 px-[88px]">
         <FoodsWithCategories />
       </div>
