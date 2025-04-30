@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Cards } from "./Cards";
 import FoodDetails from "./FoodDetail";
+import { useSearchParams } from "next/navigation";
 
 type FoodDataTypes = {
   name: string;
@@ -18,6 +19,8 @@ type FoodDataTypes = {
 export const FoodsWithCategories = () => {
   const [foods, setFoods] = useState<FoodDataTypes[]>([]);
   const [selectedFood, setSelectedFood] = useState<any | null>(null);
+  const searchParams = useSearchParams();
+  const categoryId = searchParams.get("categoryId");
 
   const fetchFoods = async () => {
     const res = await axios.get(
@@ -25,10 +28,23 @@ export const FoodsWithCategories = () => {
     );
     setFoods(res.data.foods);
   };
+  const getFoods = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}food${
+          categoryId ? "?categoryId=" + categoryId : ""
+        }`
+      );
+      setFoods(res.data.foods);
+    } catch (error) {
+      console.error("Error fetching filtered foods:", error);
+    }
+  };
 
   useEffect(() => {
     fetchFoods();
-  }, []);
+    getFoods();
+  }, [searchParams]);
 
   const cardsData = foods?.slice(0, 6);
 
@@ -55,7 +71,7 @@ export const FoodsWithCategories = () => {
       ))}
 
       {selectedFood && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(24,24,27,0.4)]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20">
           <FoodDetails
             foodDetails={selectedFood}
             onClose={() => setSelectedFood(null)}

@@ -65,7 +65,7 @@ export const Navigation = () => {
           </button>
         </div>
         {showAddressCard && (
-          <div className="fixed inset-0 z-10 bg-opacity-30 flex items-center justify-center">
+          <div className="fixed inset-0 z-10 bg-opacity-30 flex items-center justify-center bg-black/20">
             <Address
               onClose={() => setShowAddressCard(false)}
               onSave={(newAddress) => {
