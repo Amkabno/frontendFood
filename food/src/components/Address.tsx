@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 type Props = {
   onClose: () => void;
@@ -8,9 +8,28 @@ type Props = {
 
 function Address({ onClose, onSave }: Props) {
   const [inputValue, setInputValue] = useState("");
+  const modalRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
   return (
-    <div className="w-[480px] h-object-fit rounded-[12px] bg-white flex flex-col p-[24px] justify-between gap-[24px] relative">
+    <div
+      ref={modalRef}
+      className="w-[480px] h-object-fit rounded-[12px] bg-white flex flex-col p-[24px] justify-between gap-[24px] relative"
+    >
       <h2 className="text-xl font-semibold">Delivery address</h2>
       <textarea
         value={inputValue}

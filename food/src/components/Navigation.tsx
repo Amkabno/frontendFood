@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { ShoppingCart, User, MapPin, ChevronRight } from "lucide-react";
+import { ShoppingCart, MapPin, ChevronRight } from "lucide-react";
 import Address from "./Address";
 import { OrderDetails } from "./OrderDetails";
+import { SignOut } from "./SignOut";
 
 export const Navigation = () => {
   const [focused, setFocused] = useState(false);
@@ -59,11 +60,9 @@ export const Navigation = () => {
           >
             <ShoppingCart className="size-[16px]" />
           </button>
-
-          <button className="w-[36px] h-[36px] bg-[#ef4444] flex justify-center items-center rounded-full">
-            <User className="text-white size-[16px]" />
-          </button>
+          <SignOut />
         </div>
+
         {showAddressCard && (
           <div className="fixed inset-0 z-10 bg-opacity-30 flex items-center justify-center bg-black/20">
             <Address

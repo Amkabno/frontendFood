@@ -22,17 +22,11 @@ export const FoodsWithCategories = () => {
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
 
-  const fetchFoods = async () => {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}food/68009ef1b62026487333f1be`
-    );
-    setFoods(res.data.foods);
-  };
   const getFoods = async () => {
     try {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}food${
-          categoryId ? "?categoryId=" + categoryId : ""
+          categoryId ? `?categoryId=${categoryId}` : ""
         }`
       );
       setFoods(res.data.foods);
@@ -42,9 +36,8 @@ export const FoodsWithCategories = () => {
   };
 
   useEffect(() => {
-    fetchFoods();
     getFoods();
-  }, [searchParams]);
+  }, [categoryId]);
 
   const cardsData = foods?.slice(0, 6);
 
@@ -55,7 +48,7 @@ export const FoodsWithCategories = () => {
           <p className="py-[54px]">{card.name}</p>
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-[36px]">
             {card.result?.map((food) => (
-              <div key={food._id} className=" flex justify-center">
+              <div key={food._id} className="flex justify-center">
                 <Cards
                   name={food.name}
                   price={food.price}

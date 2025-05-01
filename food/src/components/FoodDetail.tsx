@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { X, Minus, Plus } from "lucide-react";
 
 type Props = {
@@ -18,6 +18,24 @@ function FoodDetails({ foodDetails, onClose }: Props) {
   const max = 200;
   const min = 0;
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+
   const handleIncrease = () => {
     if (quantity < max) {
       setQuantity(quantity + 1);
@@ -31,10 +49,13 @@ function FoodDetails({ foodDetails, onClose }: Props) {
   };
 
   return (
-    <div className="w-[826px] h-[412px] rounded-[20px] bg-white flex p-[24px] justify-between gap-[24px]">
+    <div
+      ref={modalRef}
+      className="w-[826px] h-[430px] rounded-[20px] bg-white flex p-[24px] justify-between gap-[24px]"
+    >
       <div>
         <img
-          className="w-[700px] h-[364px] rounded-[12px]"
+          className="w-[700px] h-[382px] rounded-[12px]"
           src={foodDetails.image}
           alt={foodDetails.name}
         />

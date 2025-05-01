@@ -1,6 +1,6 @@
 import React from "react";
 import { Plus } from "lucide-react";
-import { FoodsWithCategories } from "./FoodsWithCategories";
+
 
 interface CardProps {
   image: string;
